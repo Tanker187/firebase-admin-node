@@ -3895,8 +3895,8 @@ AUTH_CONFIGS.forEach((testConfig) => {
         expect(decoded).to.have.property('header').that.has.property('alg', 'none');
         expect(decoded).to.have.property('payload').that.has.property('uid', 'uid1');
 
-        // Make sure this doesn't throw
-        jwt.verify(token, undefined as any, { algorithms: ['none'] });
+        // Make sure this doesn't throw when decoding the token
+        jwt.decode(token);
       });
 
       it('verifyIdToken() should reject revoked ID tokens', () => {

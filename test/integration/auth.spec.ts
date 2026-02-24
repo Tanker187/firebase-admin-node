@@ -1948,7 +1948,7 @@ describe('admin.auth', () => {
       it('importUsers() should upload a user to the specified tenant', () => {
         const currentHashKey = importOptions.hash.key.toString('utf8');
         const passwordHash =
-          crypto.createHmac('sha256', currentHashKey).update(rawPassword + rawSalt).digest();
+          crypto.pbkdf2Sync(rawPassword, rawSalt, 100000, 32, 'sha256');
         const importUserRecord: any = {
           uid: createdUserUid,
           email: createdUserUid + '@example.com',
